@@ -16,6 +16,7 @@ void bathit(){
 	while(nMotorEncoder[motorA] > 0){
 		motor[motorA] = -15;
 	}
+	motor[motorA]=0;
 }
 void brake(){
 	motor[motorB] = 0;
@@ -200,7 +201,6 @@ while (x > (height * ratio_height)){
 brake();
 bathit();
 */
-motor[motorA] = 0;
 while (SensorValue(rightLight)>lightThresh){
 	motor[motorB] = 50;
 	motor[motorC] = 50;
