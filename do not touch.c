@@ -81,10 +81,10 @@ void alignment(){
 task main(){
 	//INPUTS GO HERE TADAAA
 int lightThresh = 35;
-float length = 100.3;         /*HEIGHT Distance INPUT in CM HEIGHT to line up with the waterbottle to go over to hit it*/
-float width = -91.4;         //travel half width backwards (to hit the ball)
-float ratio_length = 0.3;
+float width = 100.3;         /*WIDTH Distance INPUT in CM HEIGHT to line up with the waterbottle to go over to hit it*/
+float height = -91.4;         //HEIGHT travel half width backwards (to hit the ball)
 float ratio_width = 0.3;
+float ratio_height = 0.3;
 float x = 0.0;
 //activate PID motor control
 nMotorPIDSpeedCtrl[motorB] = mtrSpeedReg;
@@ -122,7 +122,7 @@ numbturns(1);
 numbright(1);
 //distance stuff
 resetEncoder();
-while (x > -(length * ratio_length )){ /* 0.5 is RATIO */
+while (x > -(width * ratio_width)){ /* 0.5 is RATIO */
 	motor[motorB] = -30;
 	motor[motorC] = -30;
 	x = measuredist();
@@ -134,7 +134,7 @@ wait1Msec(500);
 alignment();
 x = 0.0;
 resetEncoder();
-while (x > (width * ratio_width )){ /* DECIMAL is ratio */
+while (x > (height * ratio_height)){ /* DECIMAL is ratio */
 	motor[motorB] = -50;
 	motor[motorC] = -50;
 	x = measuredist();
