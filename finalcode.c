@@ -55,12 +55,12 @@ float measuredist(){
 void alignment(int lightThresh){
 	while((SensorValue(leftLight)>lightThresh) && (SensorValue(rightLight)>lightThresh)){
 		nMotorEncoder[motorB]=0;
-		while(nMotorEncoder[motorB]<30){
+		while(nMotorEncoder[motorB]<20){
 			motor[motorB] = 25;
 			motor[motorC] = 0;
 		}
 		nMotorEncoder[motorC]=0;
-		while(nMotorEncoder[motorC]<30){
+		while(nMotorEncoder[motorC]<20){
 			motor[motorB] = 0;
 			motor[motorC] = 25;
 		}
