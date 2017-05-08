@@ -13,8 +13,7 @@ void bathit(){
 		motor[motorA] = 75;
 	}
 	motor[motorA] = 0;
-	nMotorEncoder[motorA] = 0; //reset motor encoder
-	while(nMotorEncoder[motorA] > -90){
+	while(nMotorEncoder[motorA] > 0){
 		motor[motorA] = -15;
 	}
 }
@@ -34,15 +33,15 @@ void numbturns(int turns){
 		turns--;
 	}
 }
-void numbright(int turn){
-	while(turn>0){
+void numbright(int turns){
+	while(turns>0){
 		nMotorEncoder[motorB] = 0;
 		while(nMotorEncoder[motorB]<176){
 			motor[motorB]=25;
 			motor[motorC]=-25;
 		}
 		brake();
-		turn--;
+		turns--;
 	}
 }
 float measuredist(){
@@ -120,12 +119,11 @@ while(SensorValue(rightLight)>lightThresh){
 	motor[motorB] = 50;
 	motor[motorC] = -50;
 }
-int corners = 0;                                    //corners to turn around on
-while(corners < 4){
+//corners to turn around on
+for(int corners=0; corners<4; corners++){
 	while(SensorValue(upLight)>lightThresh){          //line following
 		linefollowccw(lightThresh);
 	}
-	corners += 1;
 	// sweeping the long sides
 	if (corners%2==1){
 		resetEncoder();
