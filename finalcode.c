@@ -51,6 +51,24 @@ float measuredist(){
 	float distance = degdist*(nMotorEncoder[motorB]);
 	return distance;
 }
+void untildist(float distance){
+	float x = 0.0;
+	resetEncoder();
+	if(distance>0){
+		while (x<distance){
+			motor[motorB] = 30;
+			motor[motorC] = 30;
+			x = measuredist();
+		}
+	}
+	if(distance<0){
+		while (x>distance){
+			motor[motorB] = -30;
+			motor[motorC] = -30;
+			x = measuredist();
+		}
+	}
+}
 void alignment(int lightThresh){
 	while((SensorValue(leftLight)>lightThresh) && (SensorValue(rightLight)>lightThresh)){
 		nMotorEncoder[motorB]=0;
@@ -128,7 +146,7 @@ for(int corners=0; corners<4; corners++){
 	if (corners%2==1){
 		resetEncoder();
 		x = 0.0;
-		while (x > -(length * ratio_length )){ /* 0.5 is RATIO */
+		while (x > -(width * ratio_width)){ /* 0.5 is RATIO */
 			motor[motorB] = -30;
 			motor[motorC] = -30;
 			x = measuredist();
