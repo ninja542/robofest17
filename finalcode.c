@@ -121,7 +121,7 @@ task main()
 int lightThresh = 40;
 int aluminumfoil = 90;
 float width = 90;          /*WIDTH  Distance INPUT in CM HEIGHT to line up with the waterbottle to go over to hit it*/
-float height = -110;         //HEIGHT travel half width backwards (to hit the ball)
+float height = 110;         //HEIGHT travel half width backwards (to hit the ball)
 float ratio_width = 0.3;
 float ratio_height = 0.35;
 float x = 0.0;
@@ -172,7 +172,7 @@ motor[motorB] = -15; //so alignment doesn't read outside
 motor[motorC] = -15;
 wait1Msec(500);
 alignment(lightThresh);
-untildist(height*ratio_height);
+untildist(-height*ratio_height);
 brake();
 bathit();
 //implementation end
