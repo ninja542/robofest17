@@ -46,7 +46,7 @@ void linefollowcw(int lightThresh){
 	} 
 }
 task main(){
-	while(True){
+	while(true){
 		linefollowccw();
 	}
 }
