@@ -51,18 +51,18 @@ float measuredist(){
 	float distance = degdist*(nMotorEncoder[motorB]);
 	return distance;
 }
-void untildist(float distance){
+void untildist(float travel){
 	float x = 0.0;
 	resetEncoder();
-	if(distance>0){
-		while (x<distance){
+	if(travel>0){
+		while (x<travel){
 			motor[motorB] = 30;
 			motor[motorC] = 30;
 			x = measuredist();
 		}
 	}
-	if(distance<0){
-		while (x>distance){
+	if(travel<0){
+		while (x>travel){
 			motor[motorB] = -30;
 			motor[motorC] = -30;
 			x = measuredist();
