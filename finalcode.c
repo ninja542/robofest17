@@ -129,22 +129,23 @@ while(corners < 4){
 	// sweeping the long sides
 	if (corners%2==1){
 		resetEncoder();
-		while(x < 30.0){
-			motor[motorB]=-30;
-			motor[motorC]=-30;
-			x = 0.0;
+		x = 0.0;
+		while (x > -(length * ratio_length )){ /* 0.5 is RATIO */
+			motor[motorB] = -30;
+			motor[motorC] = -30;
+			x = measuredist();
 		}
 	}
-	else{
-		motor[motorB]=30;                                    //pushing bases part
-		motor[motorC]=30;
-		wait1Msec(650);
-		motor[motorB]=-30;
-		motor[motorC]=-30;
-		wait1Msec(650);
-	}
-	numbturns(1);
 }
+else{
+	motor[motorB]=30;                                    //pushing bases part
+	motor[motorC]=30;
+	wait1Msec(650);
+	motor[motorB]=-30;
+	motor[motorC]=-30;
+	wait1Msec(650);
+}
+numbturns(1);
 numbright(1);
 //distance stuff
 x = 0.0;
