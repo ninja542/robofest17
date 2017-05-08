@@ -107,14 +107,14 @@ float length = 90;         /* HEIGHT Distance INPUT in CM HEIGHT to line up with
 float width = -110;         //travel half width backwards (to hit the ball)
 float ratio_length = 0.3;
 float ratio_width = 0.35;
+float x = 0.0;
 //activate PID motor control
 nMotorPIDSpeedCtrl[motorB] = mtrSpeedReg;
 nMotorPIDSpeedCtrl[motorC] = mtrSpeedReg;
 //lightfollowpush
 numbturns(1);   					// North: 0, East: 1, South: 2, West: 3 FOR CHANGING STARTING ORIENTATION
-float x = 0.0;
-	motor[motorB] = 50;
-	motor[motorC] = 50;
+motor[motorB] = 50;
+motor[motorC] = 50;
 wait1Msec(1000);
 while(SensorValue(rightLight)>lightThresh){
 	motor[motorB] = 50;
