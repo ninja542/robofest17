@@ -135,14 +135,6 @@ while(corners < 4){
 			x = 0.0;
 		}
 	}
-	// else if(corners==4){
-	// 	motor[motorB]=30;                                    //pushing bases part
-	// 	motor[motorC]=30;
-	// 	wait1Msec(950);
-	// 	motor[motorB]=-30;
-	// 	motor[motorC]=-30;
-	// 	wait1Msec(950);
-	// }
 	else{
 		motor[motorB]=30;                                    //pushing bases part
 		motor[motorC]=30;
