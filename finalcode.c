@@ -164,6 +164,20 @@ else{
 numbturns(1);
 numbright(1);
 //distance stuff
+	
+//new function implementation
+untildist(-width*ratio_width);
+numbright(1);
+motor[motorB] = -15; //so alignment doesn't read outside
+motor[motorC] = -15;
+wait1Msec(500);
+alignment(lightThresh);
+untildist(height*ratio_height);
+brake();
+bathit();
+//implementation end
+//commenting out extra code for testing
+/*
 x = 0.0;
 resetEncoder();
 while (x > -(width * ratio_width)){
@@ -178,13 +192,14 @@ wait1Msec(500);
 alignment(lightThresh);
 x = 0.0;
 resetEncoder();
-while (x > (height * ratio_height)){ /* DECIMAL is ratio */
+while (x > (height * ratio_height)){
 	motor[motorB] = -50;
 	motor[motorC] = -50;
 	x = measuredist();
 }
 brake();
 bathit();
+*/
 motor[motorA] = 0;
 while (SensorValue(rightLight)>lightThresh){
 	motor[motorB] = 50;
