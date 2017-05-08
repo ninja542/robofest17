@@ -153,39 +153,37 @@ while(corners < 4){
 	}
 	numbturns(1);
 }
-	numbright(1);
-	//distance stuff
-	x = 0.0;
-	resetEncoder();
-	while (x > -(length * ratio_length )) /* 0.5 is RATIO */
-	{
-		motor[motorB] = -30;
-		motor[motorC] = -30;
-		x = measuredist();
-	}
-	numbright(1);        //right turn
-	motor[motorB] = -15; //so alignment doesn't read outside
-	motor[motorC] = -15;
-	wait1Msec(500);
-	alignment(lightThresh);
-	x = 0.0;
-	resetEncoder();
-	while (x > (width * ratio_width )) /* DECIMAL is ratio */
-	{
-		motor[motorB] = -50;
-		motor[motorC] = -50;
-		x = measuredist();
-	}
-	brake();
-	bathit();
-	motor[motorA] = 0;
-	while (SensorValue(rightLight)>lightThresh){
-		motor[motorB] = 50;
-		motor[motorC] = 50;
-	}
-	numbturns(1);
-	while(SensorValue(rightLight)<aluminumfoil){          //line following
-		linefollowccw(lightThresh);
-	}
-	brake();
+numbright(1);
+//distance stuff
+x = 0.0;
+resetEncoder();
+while (x > -(length * ratio_length )){ /* 0.5 is RATIO */
+	motor[motorB] = -30;
+	motor[motorC] = -30;
+	x = measuredist();
+}
+numbright(1);        //right turn
+motor[motorB] = -15; //so alignment doesn't read outside
+motor[motorC] = -15;
+wait1Msec(500);
+alignment(lightThresh);
+x = 0.0;
+resetEncoder();
+while (x > (width * ratio_width )){ /* DECIMAL is ratio */
+	motor[motorB] = -50;
+	motor[motorC] = -50;
+	x = measuredist();
+}
+brake();
+bathit();
+motor[motorA] = 0;
+while (SensorValue(rightLight)>lightThresh){
+	motor[motorB] = 50;
+	motor[motorC] = 50;
+}
+numbturns(1);
+while(SensorValue(rightLight)<aluminumfoil){          //line following
+	linefollowccw(lightThresh);
+}
+brake();
 }
