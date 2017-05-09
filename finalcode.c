@@ -145,7 +145,7 @@ for(int corners=0; corners<4; corners++){
 	}
 	// sweeping the long sides
 	if (corners%2==1){
-		untildist(-width*ration_width);
+		untildist(-width*ratio_width);
 	}
 }
 else{
