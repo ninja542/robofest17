@@ -145,13 +145,7 @@ for(int corners=0; corners<4; corners++){
 	}
 	// sweeping the long sides
 	if (corners%2==1){
-		resetEncoder();
-		x = 0.0;
-		while (x > -(width * ratio_width)){ /* 0.5 is RATIO */
-			motor[motorB] = -30;
-			motor[motorC] = -30;
-			x = measuredist();
-		}
+		untildist(-width*ration_width);
 	}
 }
 else{
