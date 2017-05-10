@@ -16,18 +16,27 @@ void bathit(){
 	while(nMotorEncoder[motorA] > 0){
 		motor[motorA] = -15;
 	}
-	motor[motorA]=0;
+	motor[motorA] = 0;
+}
+void push(int millisec){
+	//pushing bases part
+	motor[motorB] = 30;                                    
+	motor[motorC] = 30;
+	wait1Msec(millisec);
+	motor[motorB] = -30;
+	motor[motorC] = -30;
+	wait1Msec(millisec);
 }
 void brake(){
 	motor[motorB] = 0;
 	motor[motorC] = 0;
 }
 void numbturns(int turns){
-	while(turns>0){
+	while(turns > 0){
 		nMotorEncoder[motorB] = 0;
-		while(nMotorEncoder[motorB]>-176){                   //trying to turn left 90 degrees
-			motor[motorB]=-25;
-			motor[motorC]=25;
+		while(nMotorEncoder[motorB] > -176){                   //trying to turn left 90 degrees
+			motor[motorB] = -25;
+			motor[motorC] = 25;
 		}
 		brake();
 		wait1Msec(250);
@@ -35,11 +44,11 @@ void numbturns(int turns){
 	}
 }
 void numbright(int turns){
-	while(turns>0){
+	while(turns > 0){
 		nMotorEncoder[motorB] = 0;
-		while(nMotorEncoder[motorB]<176){
-			motor[motorB]=25;
-			motor[motorC]=-25;
+		while(nMotorEncoder[motorB] < 176){
+			motor[motorB] = 25;
+			motor[motorC] = -25;
 		}
 		brake();
 		turns--;
@@ -48,22 +57,22 @@ void numbright(int turns){
 float measuredist(){
 	/*Floaty tings */
 	float circum = 5.6 * 3.14159;
-	float degdist = circum/360;
-	float distance = degdist*(nMotorEncoder[motorB]);
+	float degdist = circum / 360;
+	float distance = degdist * nMotorEncoder[motorB];
 	return distance;
 }
 void untildist(float travel){
 	float x = 0.0;
 	resetEncoder();
-	if(travel>0){
-		while (x<travel){
+	if(travel > 0){
+		while (x < travel){
 			motor[motorB] = 30;
 			motor[motorC] = 30;
 			x = measuredist();
 		}
 	}
-	if(travel<0){
-		while (x>travel){
+	if(travel < 0){
+		while (x > travel){
 			motor[motorB] = -30;
 			motor[motorC] = -30;
 			x = measuredist();
@@ -71,49 +80,49 @@ void untildist(float travel){
 	}
 }
 void alignment(int lightThresh){
-	while((SensorValue(leftLight)>lightThresh) && (SensorValue(rightLight)>lightThresh)){
-		nMotorEncoder[motorB]=0;
-		while(nMotorEncoder[motorB]<20){
+	while( (SensorValue(leftLight) > lightThresh) && (SensorValue(rightLight) > lightThresh) ){
+		nMotorEncoder[motorB] = 0;
+		while(nMotorEncoder[motorB] < 20){
 			motor[motorB] = 25;
 			motor[motorC] = 0;
 		}
-		nMotorEncoder[motorC]=0;
-		while(nMotorEncoder[motorC]<20){
+		nMotorEncoder[motorC] = 0;
+		while(nMotorEncoder[motorC] < 20){
 			motor[motorB] = 0;
 			motor[motorC] = 25;
 		}
 	}
-	if(SensorValue(leftLight)<lightThresh){
-		while(SensorValue(rightLight)>lightThresh){
+	if(SensorValue(leftLight) < lightThresh){
+		while(SensorValue(rightLight) > lightThresh){
 			motor[motorB] = 0;
 			motor[motorC] = 25;
 		}
 	}
 	else{
-		while(SensorValue(leftLight)>lightThresh){
+		while(SensorValue(leftLight) > lightThresh){
 			motor[motorB] = 25;
 			motor[motorC] = 0;
 		}
 	}
 }
 void linefollowccw(int lightThresh){
-	if(SensorValue(rightLight)>lightThresh){
-			motor[motorB]=50;
-			motor[motorC]=0;
+	if(SensorValue(rightLight) > lightThresh){
+			motor[motorB] = 50;
+			motor[motorC] = 0;
 		}
-	if(SensorValue(rightLight)<lightThresh){
-		motor[motorC]=50;
-		motor[motorB]=0;
+	if(SensorValue(rightLight) < lightThresh){
+		motor[motorC] = 50;
+		motor[motorB] = 0;
 	}
 }
 void linefollowcw(int lightThresh){
-	if(SensorValue(rightLight)>lightThresh){
-			motor[motorB]=0;
-			motor[motorC]=50;
+	if(SensorValue(rightLight) > lightThresh){
+			motor[motorB] = 0;
+			motor[motorC] = 50;
 		}
-	if(SensorValue(rightLight)<lightThresh){
-		motor[motorC]=0;
-		motor[motorB]=50;
+	if(SensorValue(rightLight) < lightThresh){
+		motor[motorC] = 0;
+		motor[motorB] = 50;
 	} 
 }
 task main()
@@ -134,40 +143,41 @@ numbturns(1);   					// North: 0, East: 1, South: 2, West: 3 FOR CHANGING STARTI
 motor[motorB] = 50;
 motor[motorC] = 50;
 wait1Msec(1000);
-while(SensorValue(rightLight)>lightThresh){
+while(SensorValue(rightLight) > lightThresh){
 	motor[motorB] = 50;
 	motor[motorC] = -50;
 }
 //corners to turn around on
-for(int corners=0; corners<4; corners++){
-	while(SensorValue(upLight)>lightThresh){          //line following
+for(int corners = 0; corners < 4; corners++){
+	while(SensorValue(upLight) > lightThresh){          //line following
 		linefollowccw(lightThresh);
 	}
 	// sweeping the long sides
-	if (corners%2==1){
-		untildist(-width*ratio_width);
+	if (corners == 3){
+		untildist(-width * ratio_width);
+		numbturns(1);
+		while(SensorValue(uplight) > lightThresh){
+			motor[motorB] = 50;
+			motor[motorC] = 50;
+		}
+		push(1000);
 	}
 }
 else{
-	motor[motorB]=30;                                    //pushing bases part
-	motor[motorC]=30;
-	wait1Msec(650);
-	motor[motorB]=-30;
-	motor[motorC]=-30;
-	wait1Msec(650);
+	push(650);
 }
 numbturns(1);
 numbright(1);
 //distance stuff
 	
 //new function implementation
-untildist(-width*ratio_width);
+untildist(-width * ratio_width);
 numbright(1);
 motor[motorB] = -15; //so alignment doesn't read outside
 motor[motorC] = -15;
 wait1Msec(500);
 alignment(lightThresh);
-untildist(-height*ratio_height);
+untildist(-height * ratio_height);
 brake();
 bathit();
 //implementation end
@@ -195,12 +205,12 @@ while (x > (height * ratio_height)){
 brake();
 bathit();
 */
-while (SensorValue(rightLight)>lightThresh){
+while (SensorValue(rightLight) > lightThresh){
 	motor[motorB] = 50;
 	motor[motorC] = 50;
 }
 numbturns(1);
-while(SensorValue(rightLight)<aluminumfoil){          //line following
+while(SensorValue(rightLight) < aluminumfoil){          //line following
 	linefollowccw(lightThresh);
 }
 brake();
