@@ -142,4 +142,15 @@ while (x > (height * ratio_height)){ /* DECIMAL is ratio */
 motor[motorB] = 0;
 motor[motorC] = 0;
 bathit();
+motor[motorA] = 0;
+while (SensorValue(rightLight)>lightThresh){
+	motor[motorB] = 50;
+	motor[motorC] = 50;
+}
+numbturns(1);
+while(SensorValue(rightLight)<aluminumfoil){          //line following
+	linefollowccw(lightThresh);
+}
+brake();
+}
 }
