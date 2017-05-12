@@ -43,10 +43,11 @@ void linefollowcw(int lightThresh){
 	if(SensorValue(rightLight)<lightThresh){
 		motor[motorC]=40;
 		motor[motorB]=50;
-	} 
+	}
 }
 task main(){
+	int lightThresh = 25;
 	while(true){
-		linefollowccw();
+		linefollowccw(lightThresh);
 	}
 }
