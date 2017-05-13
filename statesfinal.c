@@ -134,8 +134,8 @@ float width = 90;          /*WIDTH  Distance INPUT in CM HEIGHT to line up with 
 float height = 110;         //HEIGHT travel half width backwards (to hit the ball)
 float ratio_width = 0.3;
 float ratio_height = 0.35;
-float scythe = 15.0; //length of scythe in cm
-float robot_width = 30.0; //how fat the robot is in cm
+float scythe = 11.0; //length of scythe in cm
+float robot_width = 14.0; //how fat the robot is in cm
 //activate PID motor control
 nMotorPIDSpeedCtrl[motorB] = mtrSpeedReg;
 nMotorPIDSpeedCtrl[motorC] = mtrSpeedReg;
