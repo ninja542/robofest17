@@ -134,8 +134,8 @@ float width = 90;          /*WIDTH  Distance INPUT in CM HEIGHT to line up with 
 float height = 110;         //HEIGHT travel half width backwards (to hit the ball)
 float ratio_width = 0.3;
 float ratio_height = 0.35;
-float scythe = 15.0; //length of scythe in cm
-float robot_width = 30.0; //how fat the robot is in cm
+float scythe = 11.0; //length of scythe in cm
+float robot_width = 14.0; //how fat the robot is in cm
 //activate PID motor control
 nMotorPIDSpeedCtrl[motorB] = mtrSpeedReg;
 nMotorPIDSpeedCtrl[motorC] = mtrSpeedReg;
@@ -153,21 +153,23 @@ for(int corners = 0; corners < 4; corners++){
 	while(SensorValue(upLight) > lightThresh){          //line following
 		linefollowccw(lightThresh);
 	}
+	if (corners==3){
+		push(1000);
+	}
+	else {
+		push(650);
+	}
+	numbturns(1);
 	// sweeping the long sides
-	if (corners == 3){
+	if (corners == 2){
 		untildist(-width * ratio_width);
 		numbturns(1);
 		while(SensorValue(upLight) > lightThresh){
 			motor[motorB] = 50;
 			motor[motorC] = 50;
 		}
-		push(1000);
-	}
-	else{
-		push(650);
 	}
 }
-numbturns(1);
 numbright(1);
 //distance stuff
 //new function implementation
