@@ -134,8 +134,8 @@ float width = 90;          /*WIDTH  Distance INPUT in CM HEIGHT to line up with 
 float height = 110;         //HEIGHT travel half width backwards (to hit the ball)
 float ratio_width = 0.3;
 float ratio_height = 0.35;
-float scythe = 15; //length of scythe in cm
-//float x = 0.0;
+float scythe = 15.0; //length of scythe in cm
+float robot_width = 30.0; //how fat the robot is in cm
 //activate PID motor control
 nMotorPIDSpeedCtrl[motorB] = mtrSpeedReg;
 nMotorPIDSpeedCtrl[motorC] = mtrSpeedReg;
@@ -170,7 +170,6 @@ for(int corners = 0; corners < 4; corners++){
 numbturns(1);
 numbright(1);
 //distance stuff
-
 //new function implementation
 untildist(-width * ratio_width);
 numbright(1);
@@ -181,31 +180,6 @@ alignment(lightThresh);
 untildist(-height * ratio_height);
 brake();
 bathit();
-//implementation end
-//commenting out extra code for testing
-/*
-x = 0.0;
-resetEncoder();
-while (x > -(width * ratio_width)){
-	motor[motorB] = -30;
-	motor[motorC] = -30;
-	x = measuredist();
-}
-numbright(1);        //right turn
-motor[motorB] = -15; //so alignment doesn't read outside
-motor[motorC] = -15;
-wait1Msec(500);
-alignment(lightThresh);
-x = 0.0;
-resetEncoder();
-while (x > (height * ratio_height)){
-	motor[motorB] = -50;
-	motor[motorC] = -50;
-	x = measuredist();
-}
-brake();
-bathit();
-*/
 while (SensorValue(rightLight) > lightThresh){
 	motor[motorB] = 50;
 	motor[motorC] = 50;
